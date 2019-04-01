@@ -19,6 +19,7 @@ class BaseType(models.Model):
 
 
 class PageBaseType(BaseType):
+    """Docstring for BaseType"""
     slug = models.SlugField(null=True, unique="True")
 
     def __str__(self):
@@ -55,5 +56,3 @@ class AudioBaseType(BaseType):
     def __str__(self):
         return f'{self.bitrate} kbit/s'
 
-# related_name="%(app_label)s_%(class)s_related",
-# https://habr.com/ru/post/252563/
