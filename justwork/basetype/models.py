@@ -16,6 +16,7 @@ class BaseType(models.Model):
 
     class Meta:
         abstract = True
+        ordering = ['order', '-id']
 
 
 class PageBaseType(BaseType):

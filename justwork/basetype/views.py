@@ -15,7 +15,6 @@ class PageList(APIView):
 
     def get(self, request):
         page = self.paginate_queryset(self.queryset)
-        page.objects.order_by('audio__order').order_by('video__order').order_by('text__order')
         serializer = self.serializer_class(page, many=True, context={'request': request})
         return self.get_paginated_response(serializer.data)
 
