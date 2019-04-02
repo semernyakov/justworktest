@@ -40,7 +40,8 @@ INSTALLED_APPS = [
 
     # 3d party apps
     'rest_framework',
-    'rest_framework.authtoken',
+    'rest_framework_swagger',
+    'django_filters',
     'celery',
 
     # internal apps
@@ -117,6 +118,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 CELERY_BROKER_URL = "redis://localhost:6379/1"
 
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 20,
 }

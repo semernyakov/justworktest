@@ -20,7 +20,15 @@ class TextSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class PageSerializer(serializers.ModelSerializer):
+class PageListSerializer(serializers.HyperlinkedModelSerializer):
+    url = serializers.HyperlinkedIdentityField(view_name="page_detail")
+
+    class Meta:
+        model = models.PageBaseType
+        fields = ('url',)
+
+
+class PageDetailSerializer(serializers.ModelSerializer):
     audio = AudioSerializer(many=True, read_only=True)
     video = VideoSerializer(many=True, read_only=True)
     text = TextSerializer(many=True, read_only=True)

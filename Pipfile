@@ -12,6 +12,8 @@ djangorestframework = "*"
 psycopg2-binary = "*"
 celery = "*"
 ipython = "*"
+django-rest-swagger = "*"
+django-filter = "*"
 
 [requires]
 python_version = "3.6"

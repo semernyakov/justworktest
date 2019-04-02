@@ -25,6 +25,15 @@ class PageBaseType(BaseType):
     def __str__(self):
         return f'{self.title}'
 
+    def audio_count(self):
+        return self.audio.all().count()
+
+    def video_count(self):
+        return self.video.all().count()
+
+    def text_count(self):
+        return self.text.all().count()
+
 
 class TextBaseType(BaseType):
     """Docstring for content type Text"""

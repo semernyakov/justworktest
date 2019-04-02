@@ -13,16 +13,20 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from basetype import views
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework_swagger.views import get_swagger_view
 from rest_framework import routers
-from basetype import views
-
 router = routers.DefaultRouter()
-router.register(r'pages', views.PageViewSet)
+
+schema_view = get_swagger_view(title='Pages API')
 
 urlpatterns = [
+    path('', schema_view),
     path('', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('api/v1/pages/', views.PageList.as_view(), name="pages_list"),
+    path('api/v1/page/<int:pk>/', views.PageDetail.as_view(), name="page_detail"),
+    path('api/v1/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('admin/', admin.site.urls),
 ]

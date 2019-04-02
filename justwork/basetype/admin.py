@@ -34,10 +34,21 @@ class NestedText(admin.TabularInline):
 
 @admin.register(PageBaseType)
 class PageBaseTypeAdmin(admin.ModelAdmin):
-    list_display = ['title', 'slug']
+    list_display = ['title', 'slug', 'audio_count', 'video_count', 'text_count']
     prepopulated_fields = {"slug": ("title",)}
+    search_fields = ['title', 'text__title', 'text__text', 'audio__title',
+                     'audio__title', 'video__title', 'video__subtitles']
     inlines = [
         NestedAudio,
         NestedVideo,
         NestedText,
     ]
+
+    def audio_count(self, obj):
+        return obj.audio_count()
+
+    def video_count(self, obj):
+        return obj.video_count()
+
+    def text_count(self, obj):
+        return obj.text_count()
