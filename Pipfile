@@ -13,7 +13,8 @@ psycopg2-binary = "*"
 celery = "*"
 ipython = "*"
 django-rest-swagger = "*"
-django-filter = "*"
+redis = "*"
+flower = "*"
 
 [requires]
 python_version = "3.6"
