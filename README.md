@@ -41,6 +41,9 @@ docker-compose run cli loaddata initial_data.json
 
 ## Запуск тестов
 
+```
+docker-compose run cli test basetype
+```
 
 ## API v1
 
