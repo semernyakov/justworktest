@@ -28,15 +28,19 @@ $ docker-compose up
 ```
 $ docker-compose run cli migrate
 ```
-Создаём суперпользователя
+Загружаем фикстуры
 ```
-$ docker-compose run cli createsuperuser
+docker-compose run cli loaddata initial_data.json
 ```
-Открываем браузер по адресу http://0.0.0.0:8000
 
-## Фикстуры и тесты
+Открываем браузер по адресу http://0.0.0.0:8000/admin/
 
-...
+Логин: admin
+
+Пароль: admin
+
+## Запуск тестов
+
 
 ## API v1
 
@@ -123,3 +127,15 @@ Request command: curl -X GET "http://0.0.0.0:8000/api/v1/page/1/" -H "accept: ap
 * После просмотра каждой сущности поле 'counter' увеличивается на 1 ед. в асинхронном и атамарном порядке, посредством Celery
 * Поиск в админке работает по всем поляем, в т.ч. по всем основным полям в связанных моделях
 * Для отслеживания результата работы воркеров см. ./justwork/worker.log
+
+#### Полезные команды
+
+Для работы с ./manage.py <command> в докере используйте команду:
+```
+docker-compose run cli <command>
+```
+
+Для создания новых фикстур
+```
+docker-compose run cli dumpdata --format=json  > ./justwork/basetype/fixtures/initial_data.json
+```
