@@ -17,6 +17,10 @@
 * и т.д. ... 
 
 Все зависимости прописаны в фаилах Pipfile и Pipfile.lock
+ 
+```
+git clone https://github.com/beatum/justworktest.git && cd $_
+```
 
 ## Cборка и запуск
 
