@@ -22,6 +22,7 @@ def save_counter(page):
                         i.counter += 1
                         i.save()
                 page.counter += 1
+                page.save()
         except DatabaseError as e:
             return e
 

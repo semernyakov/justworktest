@@ -1,0 +1,46 @@
+version: '2'
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: secret
+  cache:
+    image: redis
+    restart: on-failure
+  worker:
+    build: .
+    image: justwork
+    command: bash -c "cd justwork && celery worker -A justwork --loglevel=info --logfile=worker.log -B"
+    environment:
+     C_FORCE_ROOT: 1
+    volumes:
+      - .:/code
+    links:
+      - db
+      - cache
+  web:
+    build: .
+    image: justwork
+    command: python ./justwork/manage.py runserver 0.0.0.0:8000
+    environment:
+      DATABASE_URL: psql://postgres:secret@db/postgres
+      REDIS_URL: redis://cache:6379
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    links:
+      - db
+      - cache
+  cli:
+    image: justwork
+    entrypoint: python ./justwork/manage.py
+    environment:
+      DATABASE_URL: psql://postgres:secret@db/postgres
+      REDIS_URL: redis://cache:6379
+    volumes:
+      - .:/code
+    links:
+      - db
+      - cache
